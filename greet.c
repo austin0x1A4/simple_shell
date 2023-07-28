@@ -2,20 +2,23 @@
 #include "shell.h"
 
 /**
- * main func that passes betty
+ * @brief Function to greet the user with "Hello, World!"
  */
-
-int main() {
-    /* Call the greet() function to print a greeting message */
-    greet();
-    return 0;
+void greet(void)
+{
+	/* Print the greeting message */
+	printf("Hello, World!\n");
 }
 
 /**
- * Function to greet the user with "Hello, World!"
+ * @brief The main function.
+ *
+ * @return Returns zero to indicate successful execution.
  */
-void greet() {
-    /* Print the greeting message */
-    printf("Hello, World!\n");
+int main(void)
+{
+    /* Call the greet() function to print a greeting message */
+    greet();
+    return (0);
 }
 
