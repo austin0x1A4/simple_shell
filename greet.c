@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include "main.h"
+#include "shell.h"
+
+/**
+ * main func that passes betty
+ */
 
 int main() {
     /* Call the greet() function to print a greeting message */
