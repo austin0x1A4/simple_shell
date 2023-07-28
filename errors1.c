@@ -1,21 +1,20 @@
 #include "shell.h"
 
 /**
- * convert_string_to_integer - Converts a string to an integer.
- * @s: The string to be converted.
+ * _erratoi - converts a string to an integer
+ * @s: the string to be converted
  *
- * Return: 0 if no numbers in string, converted number otherwise.
- *         -1 on error.
+ * Return: 0 if no numbers in the string, converted number otherwise
+ *         -1 on error
  */
-int convert_string_to_integer(char *s)
+int _erratoi(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
 
 	if (*s == '+')
-		s++; /* Skip '+' sign if present. */
-
-	for (i = 0;  s[i] != '\0'; i++)
+		s++; /* TODO: why does this make main return 255? */
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
 		{
@@ -27,36 +26,35 @@ int convert_string_to_integer(char *s)
 		else
 			return (-1);
 	}
-
 	return (result);
 }
 
 /**
- * print_error_message - Prints an error message.
- * @info: The parameter & return info struct.
- * @error_type: String containing the specified error type.
+ * print_error - prints an error message
+ * @info: the parameter & return info struct
+ * @estr: string containing the specified error type
  *
- * Return: None.
+ * Return: void
  */
-void print_error_message(info_t *info, char *error_type)
+void print_error(info_t *info, char *estr)
 {
 	_eputs(info->fname);
 	_eputs(": ");
-	print_decimal(info->line_count, STDERR_FILENO);
+	print_d(info->line_count, STDERR_FILENO);
 	_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");
-	_eputs(error_type);
+	_eputs(estr);
 }
 
 /**
- * print_decimal - Function prints a decimal (integer) number (base 10).
- * @input: The input number.
- * @fd: The file descriptor to write to.
+ * print_d - function prints a decimal (integer) number (base 10)
+ * @input: the input
+ * @fd: the file descriptor to write to
  *
- * Return: The number of characters printed.
+ * Return: number of characters printed
  */
-int print_decimal(int input, int fd)
+int print_d(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
 	int i, count = 0;
@@ -64,7 +62,6 @@ int print_decimal(int input, int fd)
 
 	if (fd == STDERR_FILENO)
 		__putchar = _eputchar;
-
 	if (input < 0)
 	{
 		_abs_ = -input;
@@ -73,7 +70,6 @@ int print_decimal(int input, int fd)
 	}
 	else
 		_abs_ = input;
-
 	current = _abs_;
 	for (i = 1000000000; i > 1; i /= 10)
 	{
@@ -84,7 +80,6 @@ int print_decimal(int input, int fd)
 		}
 		current %= i;
 	}
-
 	__putchar('0' + current);
 	count++;
 
@@ -92,14 +87,14 @@ int print_decimal(int input, int fd)
 }
 
 /**
- * convert_number_to_string - Converter function, a clone of itoa.
- * @num: The number to convert.
- * @base: The base to use for conversion.
- * @flags: Argument flags.
+ * convert_number - converter function, a clone of itoa
+ * @num: number
+ * @base: base
+ * @flags: argument flags
  *
- * Return: The resulting string.
+ * Return: string
  */
-char *convert_number_to_string(long int num, int base, int flags)
+char *convert_number(long int num, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
@@ -112,7 +107,6 @@ char *convert_number_to_string(long int num, int base, int flags)
 		n = -num;
 		sign = '-';
 	}
-
 	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
@@ -124,26 +118,23 @@ char *convert_number_to_string(long int num, int base, int flags)
 
 	if (sign)
 		*--ptr = sign;
-
 	return (ptr);
 }
 
 /**
- * remove_comments_from_string - Replaces first instance of '#' with '\0'.
- * @buf: Address of the string to modify.
+ * remove_comments - function replaces the first instance of '#' with '\0'
+ * @buf: address of the string to modify
  *
- * Return: Always 0.
+ * Return: Always 0
  */
-void remove_comments_from_string(char *buf)
+void remove_comments(char *buf)
 {
 	int i;
 
 	for (i = 0; buf[i] != '\0'; i++)
-	{
 		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
 		{
 			buf[i] = '\0';
 			break;
 		}
-	}
 }

@@ -14,7 +14,7 @@ void *_memset(void *s, int b, size_t n)
 
 	for (i = 0; i < n; i++)
 		ptr[i] = (unsigned char)b;
-	return s;
+	return (s);
 }
 
 /**
@@ -23,13 +23,15 @@ void *_memset(void *s, int b, size_t n)
  */
 void ffree(char **arr)
 {
-	if (arr)
-	{
-		for (int i = 0; arr[i]; i++)
-			free(arr[i]);
-		free(arr);
-	}
+    int i;
+    if (arr)
+    {
+        for (i = 0; arr[i]; i++)
+            free(arr[i]);
+        free(arr);
+    }
 }
+
 
 /**
  * _realloc - reallocates a block of memory
@@ -44,19 +46,19 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 	void *new_ptr;
 
 	if (!ptr)
-		return malloc(new_size);
+		return (malloc(new_size));
 
 	if (new_size == 0)
 	{
 		free(ptr);
-		return NULL;
+		return (NULL);
 	}
 
 	new_ptr = malloc(new_size);
 	if (!new_ptr)
-		return NULL;
+		return (NULL);
 
-	_memcpy(new_ptr, ptr, (old_size < new_size) ? old_size : new_size);
+	memcpy(new_ptr, ptr, (old_size < new_size) ? old_size : new_size);
 	free(ptr);
-	return new_ptr;
+	return (new_ptr);
 }
