@@ -5,7 +5,7 @@
 
 void display_prompt(void)
 {
-    printf("$ "); // The shell prompt
+    printf("#cisfun$ "); // The shell prompt
 }
 
 int read_input(char **line)
